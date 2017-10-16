@@ -23,3 +23,6 @@ class Solver:
 			self.graph[from_state].append([to_state, res[4]])
 		
 		return self.graph
+	
+	def solve(self):
+		return self.graph
