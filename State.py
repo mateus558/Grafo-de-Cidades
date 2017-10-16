@@ -15,7 +15,10 @@ class State:
 	
 	def setId(self, id):
 		self.id = id
-		
+	
+	def __str__(self):
+		return format(pos) + format(id)
+	
 	def __hash__(self):
 		return hash((self.pos[0], self.pos[1]))
 	
@@ -24,3 +27,4 @@ class State:
 	
 	def __ne__(self, other):
 		return not(self == other)
+
