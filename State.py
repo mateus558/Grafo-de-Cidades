@@ -4,17 +4,17 @@ class State:
 		self.x = x
 		self.y = y
 		self.id = y
-	def getX:
+	def getX(self):
 		return self.x
-	def getY:
+	def getY(self):
 		return self.y
-	def getId:
+	def getId(self):
 		return self.id
-	def setX(x):
+	def setX(self, x):
 		self.x = x
-	def setY(y):
+	def setY(self, y):
 		self.y = y
-	def setId(id):
+	def setId(self, id):
 		self.id = id
 
 
