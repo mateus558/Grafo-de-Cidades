@@ -4,7 +4,7 @@ from collections import defaultdict
 
 class Solver:
 	
-	def __init__(self, start = State(), end = State(), graph = {}):
+	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):
 		self.start = start
 		self.end = end
 		self.graph = graph
@@ -20,9 +20,7 @@ class Solver:
 			res = list(map(float, line.split()))
 			from_state = State(res[0], res[1])
 			to_state = State(res[2], res[3])
-			self.graph[from_state].append(to_state)
-			
-			print(self.graph.items())
+			self.graph[from_state].append([to_state, res[4]])
 		return self.graph
 
 g = Solver()
