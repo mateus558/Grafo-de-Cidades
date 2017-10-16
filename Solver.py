@@ -1,4 +1,3 @@
-import abc
 from State import *
 from collections import defaultdict
 
@@ -17,11 +16,10 @@ class Solver:
 		while True:
 			line = f.readline()
 			if not line: break
+		
 			res = list(map(float, line.split()))
 			from_state = State(res[0], res[1])
 			to_state = State(res[2], res[3])
 			self.graph[from_state].append([to_state, res[4]])
+		
 		return self.graph
-
-g = Solver()
-g.read("graph.inst")
