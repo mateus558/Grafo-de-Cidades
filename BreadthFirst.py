@@ -8,6 +8,9 @@ class BreadthFirst(Solver):
 		self.queue = []
 		
 	def solve(self):
+		expandedNodes = 0
+		branchingSum = 0
+		iterations = 0
 		start_time = time.time()
 		self.queue.append(self.start)
 		visited = [self.start]
@@ -18,10 +21,14 @@ class BreadthFirst(Solver):
 			if state == self.end:
 				self.end = state
 				break
-					
-			for s in self.graph[state]:
+			
+			expandedNodes = expandedNodes + 1
+			iterations = iterations + 1
+			
+			for s in self.graph[state]: 
 				if s[0] not in visited:
 					self.queue.append(s[0])
+					branchingSum = branchingSum + 1
 					s[0].setFather(state)
 					s[0].increaseCostSoFar(s[1])	
 					visited.append(s[0])
@@ -39,7 +46,7 @@ class BreadthFirst(Solver):
 				itr = itr.getFather()
 			else:
 				path.reverse()
-				self.solution = Solution(path, cost, time_elapsed)
+				self.solution = Solution(path, cost, expandedNodes, (branchingSum/iterations), len(visited), time_elapsed)
 				break
 				
 		return self.solution
