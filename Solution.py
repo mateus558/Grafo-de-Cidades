@@ -1,13 +1,25 @@
 from State import *
 
 class Solution:
-	def __init__(self, a = [], cost = 0.0, time_elapsed = 0.0):
+	def __init__(self, path = [], cost = 0.0, time_elapsed = 0.0):
 		self.time_elapsed = time_elapsed
 		self.cost = cost
-		self.a = a
+		self.path = path
       
 	def insertState(self, s):
-		self.a.append(s)
+		self.path.append(s)
 
 	def getPath(self):
-		return self.a
+		return self.path
+		
+	def getTimeElapsed(self):
+		return self.time_elapsed
+		
+		
+		
+		
+		
+		
+		
+		
+		
