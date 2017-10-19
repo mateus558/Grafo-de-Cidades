@@ -7,7 +7,7 @@ class Solver:
 		self.start = start
 		self.end = end
 		self.graph = graph
-		
+		self.solution = None		
 		return
 			
 	def read(self, file):
@@ -24,5 +24,4 @@ class Solver:
 		
 		return self.graph
 	
-	def solve(self):
-		return self.graph
+	
