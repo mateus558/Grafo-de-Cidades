@@ -1,11 +1,12 @@
 class State:
 	
-	def __init__(self, x = 0.0, y = 0.0, id = " "):
+	def __init__(self, x = 0.0, y = 0.0, id = " ", priority = 0.0):
 		self.id = id
 		self.pos = [x, y]
 		self.visited = False
 		self.father = None
 		self.costSoFar = 0
+		self.priority = priority
 			
 	def getPos(self):
 		return self.pos
@@ -18,6 +19,9 @@ class State:
 	
 	def setId(self, id):
 		self.id = id
+	
+	def setPriority(self, priority):
+		self.priority = priority
 	
 	def setVisited(self, visited):
 		self.visited = visited
@@ -36,6 +40,9 @@ class State:
 	
 	def isVisited(self):
 		return self.visited
+	
+	def __cmp__(self, other):
+		return (self.priority, other.priority)
 	
 	def __repr__(self):
 		return str(self.pos) + str(" ") + str(self.id)
