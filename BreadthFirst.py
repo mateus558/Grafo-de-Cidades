@@ -5,7 +5,7 @@ from Solution import *
 class BreadthFirst(Solver):
 	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):
 		super(BreadthFirst, self).__init__(start, end, graph)
-		self.queue = []
+		self.queue = []	
 		
 	def solve(self):
 		expandedNodes = 0
@@ -27,7 +27,7 @@ class BreadthFirst(Solver):
 			
 			for s in self.graph[state]: 
 				if s[0] not in visited:
-					self.queue.append(s[0])
+					self.queue.insert(0, s[0])
 					branchingSum = branchingSum + 1
 					s[0].setFather(state)
 					s[0].increaseCostSoFar(s[1])	
@@ -46,7 +46,11 @@ class BreadthFirst(Solver):
 				itr = itr.getFather()
 			else:
 				path.reverse()
-				self.solution = Solution(path, cost, expandedNodes, (branchingSum/iterations), len(visited), time_elapsed)
+				if iterations == 0:
+					branchFactor = 0
+				else:
+					branchFactor = branchingSum/iterations
+				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed)
 				break
 				
 		return self.solution
