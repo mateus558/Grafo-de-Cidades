@@ -2,35 +2,35 @@ import time
 from Solver import *
 from Solution import *
 
+
 class Backtracking(Solver):
     def __init__(self, start=State(), end=State(), graph=defaultdict(list)):
         super(Backtracking, self).__init__(
             self, start, end, graph=defaultdict(list))
-        self.queue = []
-        self.sucess = False
-        self.failure = False
 
     def solve(self):
+        self.operators = []
+        sucess = False
+        failure = False
+        currentState = start;
         start_time = time.time()
-        self.queue.append(self.start)  # add the initial state to the queue
-        while (!self.failure or !self.sucess):
-            state = self.queue.pop()
-            self.queue.append(state)
-            if(self.queue): 
-                # choose a operator
-                father = state
-                state =  # new state
-                #preciso verificar a operacao do estado
-                # se n tiver mais operacoes remover esse estado
-                if(state == end):
-                    self.sucess = True
-                else:
-                # self.queue.append()
+        while(!failure or !sucess):
+            # pega os filhos
+            if(len(operators) != 0 and !operators[i].isVisited()):
+                for i in range(0, len(operators) - 1):
+                    if(!operators[i].isVisited()):
+                        operators[i].setFather(currentState)
+                        currentState = operators[i]
+                if(currentState == end):
+                    sucess = True
             else:
-                self.failure = True
+                if(currentState == start):
+                    failure = True
+                else:
+                    currentState = currentState.getFather()
         end_time = time.time()
-        if(self.sucess):
-            itr = state
+        if(sucess):
+            itr = currentState
             cost = itr.getCost()
 		    path = []
             time_elapsed = end_time - start_time
@@ -45,6 +45,12 @@ class Backtracking(Solver):
 		else:
             self.solution = NULL
 		 return self.solution
-
-                
-
+    def insertionSort(self,array):
+        for i in range (1, len(array)-1):
+            key = array[i]
+            j = i-1
+            while(j>=0 and array[j].getPos()[0] > key.getPos()[0]):
+                array[j+1] = array[j]
+                j = j-1
+            array[j+1] = key
+        return array
