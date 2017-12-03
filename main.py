@@ -9,9 +9,16 @@ from AStar import *
 from GreedySearch import *
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--inst', help='Instance of the city graph to be solved.')
+parser.add_argument('--instance', help='Instance of the city graph to be solved.')
 parser.add_argument('--method', help='Method to solve the problem.')
+parser.add_argument('--x', help='')
+parser.add_argument('--y', help='')
+parser.add_argument('--x1', help='')
+parser.add_argument('--y1', help='')
 args = parser.parse_args()
+
+start = None
+end = None
 
 def wait():
     input("\nPress enter to continue...")
@@ -25,6 +32,15 @@ def clear():
 		os.system('cls')
 	return 
 
+def enterObjective():
+	x, y = map(float, input("Enter the initial state: ").split())
+	start = State(x, y)
+
+	x1, y1 = map(float, input("Enter the terminal state: ").split())
+	end = State(x1, y1)
+	print(end)
+	return 
+	
 def selectMethod(solver):
 	print("1 - Backtracking")
 	print("2 - Breadth First Search")
@@ -35,28 +51,31 @@ def selectMethod(solver):
 	print("7 - IDA* Search")
 	
 	o = int(input("> "))
+	enterObjective()
 	if o == 1:
 		solver = Solver()
 	if o == 2:
-		solver = BreadthFirst()
+		solver = BreadthFirst(start, end)
 	if o == 3:
 		solver = Solver()
 	if o == 4:
-		solver = OrderedSearch()
+		solver = OrderedSearch(start, end)
 	if o == 5:
-		solver = GreedySearch()
+		solver = GreedySearch(start, end)
 	if o == 6:
-		solver = AStar()
+		solver = AStar(start, end)
 	if o == 7:
 		solver = Solver()
+		
 	return solver
 
 def printStatistics(solution):
 	path = solution.getPath()
 	
-	for state in path:
-		print (state.__str__() + str(" -> "))
-	print ("END\n")
+	print(path)
+	#for state in path:
+	#	print (state.__str__() + str(" -> "))
+	#print ("END\n")
 	
 	print ("Branching Factor: " + str(solution.getBranchFactor()))
 	print ("Number of expanded nodes: " + str(solution.getExpandedNodes()))
@@ -102,7 +121,13 @@ def main():
 	solver = None
 	solution = None
 	hasArgs = True
-	fileName = args.inst
+	fileName = args.instance
+
+	if args.x != None:
+		x = float(args.x)
+		y = float(args.y)
+		x1 = float(args.x1)
+		y1 = float(args.y1)
 
 	if fileName == None or args.method == None:
 		hasFlags = False
@@ -110,19 +135,19 @@ def main():
 	elif args.method == "BTCK": #Backtracking
 		solver = Solver()
 	elif args.method == "BFS":	#Breadth First Search
-		solver = BreadthFirst()
+		solver = BreadthFirst(State(x, y), State(x1, y1))
 	elif args.method == "DFSL":	#Depth First Search limited
-		solver = BreadthFirst()
+		solver = BreadthFirst(State(x, y), State(x1, y1))
 	elif args.method == "OS":	#Ordered Search
-		solver = OrderedSearch()
+		solver = OrderedSearch(State(x, y), State(x1, y1))
 	elif args.method == "GS":	#Greedy Search
-		solver = GreedySearch()
+		solver = GreedySearch(State(x, y), State(x1, y1))
 	elif args.method == "AS":	#A* search
-		solver = AStar()
+		solver = AStar(State(x, y), State(x1, y1))
 	elif args.method == "IDAS": #IDA* search
-		solver = BreadthFirst()
+		solver = BreadthFirst(State(x, y), State(x1, y1))
 		
-	if hasFlags:
+	if hasArgs:
 		solver.read(fileName)
 		solution = solver.solve()
 		printStatistics(solution)

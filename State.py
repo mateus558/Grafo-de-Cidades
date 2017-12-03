@@ -5,7 +5,7 @@ class State:
 		self.pos = [x, y]
 		self.visited = False
 		self.father = None
-		self.costSoFar = 0
+		self.costSoFar = 0.0
 		self.depth = 0
 		self.priority = priority
 			
@@ -44,7 +44,10 @@ class State:
 	
 	def getCostSoFar(self):
 		return self.costSoFar
-		
+	
+	def setCostSoFar(self, val):
+		self.costSoFar = val
+	
 	def getCost(self):
 		return self.costSoFar	 
 	
@@ -65,6 +68,9 @@ class State:
 	
 	def __eq__(self, other):
 		return (self.pos[0], self.pos[1]) == (other.pos[0], other.pos[1])
+	
+	def __lt__(self, other):
+		return (self.priority < other.priority);
 	
 	def __ne__(self, other):
 		return not(self == other)
