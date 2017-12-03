@@ -14,7 +14,10 @@ class Solution:
 
 	def getPath(self):
 		return self.path
-		
+	
+	def getDepth(self):
+		return self.path[-1].getDepth()
+	
 	def getNumberVisited(self):
 		return self.numberVisited
 	
@@ -26,6 +29,9 @@ class Solution:
 		
 	def getTimeElapsed(self):
 		return self.time_elapsed
+	
+	def getCost(self):
+		return self.cost
 		
 		
 		

@@ -35,12 +35,18 @@ class OrderedSearch(Solver):
 			
 			for s in self.graph[state]: 
 				if s[0] not in visited:
-					self.heap.put(s[0])
 					branchingSum = branchingSum + 1
-					s[0].setFather(state)
-					s[0].increaseCostSoFar(s[1])
-					s[0].setPriority(s[1])	
-					visited.append(s[0])
+					costSoFar = state.getCostSoFar()
+					depth = s[0].getDepth() + 1
+					s[0].setDepth(depth)
+					
+					if costSoFar + s[1] < s[0].getCostSoFar():
+						s[0].setFather(state)
+						s[0].increaseCostSoFar(s[1])
+						s[0].setPriority(s[1])
+						
+						self.heap.put(s[0])	
+						visited.append(s[0])
 		
 		end_time = time.time()
 		
@@ -55,7 +61,11 @@ class OrderedSearch(Solver):
 				itr = itr.getFather()
 			else:
 				path.reverse()
-				self.solution = Solution(path, cost, expandedNodes, (branchingSum/iterations), len(visited), time_elapsed)
+				if iterations == 0:
+					branchFactor = 0
+				else:
+					branchFactor = branchingSum/iterations
+				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed)
 				break	
 	
 		return self.solution

@@ -6,6 +6,7 @@ class State:
 		self.visited = False
 		self.father = None
 		self.costSoFar = 0
+		self.depth = 0
 		self.priority = priority
 			
 	def getPos(self):
@@ -29,12 +30,21 @@ class State:
 	def setFather(self, state):
 		self.father = state
 	
+	def setDepth(self, depth):
+		self.depth = depth
+	
+	def getDepth(self):
+		return self.depth
+	
 	def getFather(self):
 		return self.father
 	
 	def increaseCostSoFar(self, cost):
 		self.costSoFar = self.costSoFar + cost
 	
+	def getCostSoFar(self):
+		return self.costSoFar
+		
 	def getCost(self):
 		return self.costSoFar	 
 	
