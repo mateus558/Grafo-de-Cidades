@@ -67,7 +67,7 @@ def printStatistics(solution):
 
 	return
 	
-def mainLoop():
+def mainLoop(solver, solution, fileName):
 	clear()	
 	
 	while True:
@@ -103,10 +103,10 @@ def main():
 	solution = None
 	hasArgs = True
 	fileName = args.inst
-	
+
 	if fileName == None or args.method == None:
 		hasFlags = False
-		mainLoop()
+		mainLoop(solver, solution, fileName)
 	elif args.method == "BTCK": #Backtracking
 		solver = Solver()
 	elif args.method == "BFS":	#Breadth First Search
