@@ -101,9 +101,11 @@ def mainLoop():
 def main():
 	solver = None
 	solution = None
+	hasArgs = True
 	fileName = args.inst
 	
 	if fileName == None or args.method == None:
+		hasFlags = False
 		mainLoop()
 	elif args.method == "BTCK": #Backtracking
 		solver = Solver()
@@ -120,9 +122,10 @@ def main():
 	elif args.method == "IDAS": #IDA* search
 		solver = BreadthFirst()
 		
-	solver.read(fileName)
-	solution = solver.solve()
-	printStatistics(solution)
+	if hasFlags:
+		solver.read(fileName)
+		solution = solver.solve()
+		printStatistics(solution)
 	
 	return
 	
