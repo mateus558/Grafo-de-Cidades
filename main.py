@@ -135,7 +135,7 @@ def main():
 		hasFlags = False
 		mainLoop(solver, solution, fileName)
 	elif args.method == "BTCK": #Backtracking
-		solver = Solver()
+		solver = Backtracking(State(x, y), State(x1, y1))
 	elif args.method == "BFS":	#Breadth First Search
 		solver = BreadthFirst(State(x, y), State(x1, y1))
 	elif args.method == "DFSL":	#Depth First Search limited

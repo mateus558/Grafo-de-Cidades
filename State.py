@@ -7,6 +7,7 @@ class State:
 		self.father = None
 		self.costSoFar = 0.0
 		self.depth = 0
+		self.operator = 0
 		self.priority = priority
 			
 	def getPos(self):
@@ -53,7 +54,12 @@ class State:
 	
 	def isVisited(self):
 		return self.visited
+
+	def getOperator(self):
+		return self.operator
 	
+	def setOperator(self, operator):
+		self.operator = operator
 	def __cmp__(self, other):
 		return (self.priority, other.priority)
 	
