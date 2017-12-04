@@ -54,7 +54,7 @@ class Backtracking(Solver):
                     self.solution = Solution(path, cost, expandedNodes, branchFactor, numberVisited, time_elapsed)
                     break
         else:
-            self.solution = NULL
+            self.solution is None
         return self.solution
 
     def insertionSort(self,array):

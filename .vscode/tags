@@ -79,7 +79,7 @@ setId	../State.py	/^	def setId(self, id):$/;"	kind:member	line:21
 setPos	../State.py	/^	def setPos(self,x, y):$/;"	kind:member	line:18
 setPriority	../State.py	/^	def setPriority(self, priority):$/;"	kind:member	line:24
 setVisited	../State.py	/^	def setVisited(self, visited):$/;"	kind:member	line:27
-solve	../AStar.py	/^	def solve(self):$/;"	kind:member	line:22
+solve	../AStar.py	/^	def solve(self):$/;"	kind:member	line:23
 solve	../Backtracking.py	/^    def solve(self):$/;"	kind:member	line:11
 solve	../BreadthFirst.py	/^	def solve(self):$/;"	kind:member	line:13
 solve	../DepthFirst.py	/^    def solve(self):$/;"	kind:member	line:13

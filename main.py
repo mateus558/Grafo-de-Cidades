@@ -153,7 +153,6 @@ def main():
 		solver.read(fileName)
 		solution = solver.solve()
 		printStatistics(solution)
-	
 	return
 	
 main()

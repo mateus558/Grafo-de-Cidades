@@ -8,7 +8,7 @@ class DepthFirst(Solver):
         self.stack = []
         self.visited = []
         self.start.setFather(State())
-        self.maxDepth = 5
+        self.maxDepth = 10000
 
     def solve(self):
         expandedNodes = 0
@@ -18,11 +18,12 @@ class DepthFirst(Solver):
         start_time = time.time()
         self.stack.append(self.start)
         self.visited = [self.start]
-        while (not self.stack == []) and (depth <= self.maxDepth):
+        while (not self.stack == []) and (depth < self.maxDepth):
             state = self.stack[len(self.stack)-1] #return the top
             self.stack.pop()
             #acho q aqui tem problema
             i = 0
+            iterations = iterations + 1
             for s in self.graph[state]: 
 				#0 - estado; 1 - custo para chegar naquele estado 
 				#Verifica se o estado nao foi visitado e o visita
@@ -34,11 +35,12 @@ class DepthFirst(Solver):
                     s[0].setFather(state)
                     s[0].increaseCostSoFar(s[1])
                     self.graph[s[0]][i][0].increaseCostSoFar(s[1])
-                    s[0].setVisited(True)
+                    expandedNodes = expandedNodes + 1
+                    self.visited.append(s[0])
             i = i+1
 
         end_time = time.time()
-        itr = self.end
+        itr = state
         cost = itr.getCost()
         path = []
         time_elapsed = end_time - start_time
@@ -52,6 +54,7 @@ class DepthFirst(Solver):
                     branchFactor = 0
                 else:
                     branchFactor = branchingSum/iterations
-                self.solution = Solution(path, cost, expandedNodes, branchFactor, len(self.visited), time_elapsed)
-                break
+                    self.solution = Solution(path, cost, expandedNodes, branchFactor, len(self.visited), time_elapsed)
+                    break
         return self.solution
+        
