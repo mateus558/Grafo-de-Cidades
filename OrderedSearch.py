@@ -32,26 +32,28 @@ class OrderedSearch(Solver):
 		while not self.heap == []:
 			state = heapq.heappop(self.heap)
 			visited.append(state[0])
-			print(state[0])
+			#print(state[0])
 			if state[0] == self.end:
 				self.end = state[0]
 				break
 			
-			expandedNodes = expandedNodes + 1
 			iterations = iterations + 1
+			
+			if len(self.graph[state]) > 0:
+				expandedNodes = expandedNodes + 1
 			
 			i = 0
 			for s in self.graph[state[0]]: 
 				#0 - estado; 1 - custo para chegar naquele estado 
 				#Verifica se o estado nao foi visitado e o visita
 				if s[0] not in visited:
-					print(s[0].getCostSoFar())
+					#print(s[0].getCostSoFar())
 					depth = state[0].getDepth() + 1
 					branchingSum = branchingSum + 1
 					if state[0].getCostSoFar() + s[1] < s[0].getCostSoFar():
-						print(s)
-						print(state[0].getCostSoFar() + s[1])
-						print(s[0].getCostSoFar())
+						#print(s)
+						#print(state[0].getCostSoFar() + s[1])
+						#print(s[0].getCostSoFar())
 						s[0].setDepth(depth)
 						s[0].setFather(state[0])
 						s[0].setCostSoFar(state[0].getCostSoFar() + s[1])
@@ -77,7 +79,7 @@ class OrderedSearch(Solver):
 					branchFactor = 0
 				else:
 					branchFactor = branchingSum/iterations
-				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed)
+				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed, iterations)
 				break	
 	
 		return self.solution

@@ -8,7 +8,6 @@ class BreadthFirst(Solver):
 		#A busca em largura usa uma fila
 		self.queue = []	
 		self.visited = []
-		self.start.setFather(State())
 		
 	def solve(self):
 		#inicializa variaveis
@@ -25,7 +24,6 @@ class BreadthFirst(Solver):
 		while not self.queue == []:
 			#Pega o estado na frente da fila
 			state = self.queue.pop(0)
-			self.visited.append(state)
 			
 			#Verifica se não eh o estado terminal
 			if state == self.end:
@@ -33,10 +31,12 @@ class BreadthFirst(Solver):
 				break
 			
 			#Atualiza o numero de estados espandidos e o numero de iteracoes
-			expandedNodes = expandedNodes + 1
 			iterations = iterations + 1
 			
 			#Para cada estado no grafo de estados
+			if len(self.graph[state]) > 0:
+				expandedNodes = expandedNodes + 1
+				
 			i = 0
 			for s in self.graph[state]: 
 				#0 - estado; 1 - custo para chegar naquele estado 
@@ -45,12 +45,13 @@ class BreadthFirst(Solver):
 					self.queue.insert(0, s[0])
 					depth = state.getDepth() + 1
 					branchingSum = branchingSum + 1
-		
+					
 					s[0].setDepth(depth)
 					s[0].setFather(state)
 					s[0].increaseCostSoFar(s[1])	
+					self.visited.append(state)
 					self.graph[s[0]][i][0].increaseCostSoFar(s[1])
-
+					
 			i = i + 1
 		#END WHILE
 					
@@ -74,10 +75,10 @@ class BreadthFirst(Solver):
 				if iterations == 0:
 					branchFactor = 0
 				else:
-					branchFactor = branchingSum/iterations
+					branchFactor = branchingSum/expandedNodes
 				
 				#Inicializa estrutura com as informacoes da solucao
-				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(self.visited), time_elapsed)
+				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(self.visited), time_elapsed, iterations)
 				break
 				
 		return self.solution

@@ -16,9 +16,8 @@ class AStar(Solver):
 	def heuristic(self, stateA, stateB):
 		posA = stateA.getPos()
 		posB = stateB.getPos()
-		res = (posB[0] - posA[0]) + (posB[1] - posA[1])
-		if res < 0: res = res * -1
-		return math.sqrt(res)
+		
+		return math.sqrt((posB[0] - posA[0])*(posB[0] - posA[0]) + (posB[1] - posA[1])*(posB[1] - posA[1]))
 	
 	def solve(self):
 		expandedNodes = 0
@@ -37,10 +36,13 @@ class AStar(Solver):
 				self.end = state
 				break
 			
-			expandedNodes = expandedNodes + 1
 			iterations = iterations + 1
 
 			i = 0
+			
+			if len(self.graph[state]) > 0:
+				expandedNodes = expandedNodes + 1
+				  
 			for s in self.graph[state]: 
 				if s[0] not in visited:
 					cost = s[1] + self.heuristic(state, s[0])
@@ -72,8 +74,8 @@ class AStar(Solver):
 				if iterations == 0:
 					branchFactor = 0
 				else:
-					branchFactor = branchingSum/iterations
-				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed)
+					branchFactor = branchingSum/expandedNodes
+				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed, iterations)
 				break
 		
 		return self.solution

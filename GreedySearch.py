@@ -17,7 +17,7 @@ class GreedySearch(Solver):
 		posA = stateA.getPos()
 		posB = stateB.getPos()
 		
-		return math.sqrt((posB[0] - posA[0]) + (posB[1] - posA[1]))
+		return math.sqrt((posB[0] - posA[0])*(posB[0] - posA[0]) + (posB[1] - posA[1])*(posB[1] - posA[1]))
 	
 	def solve(self):
 		expandedNodes = 0
@@ -36,8 +36,10 @@ class GreedySearch(Solver):
 				self.end = state
 				break
 			
-			expandedNodes = expandedNodes + 1
 			iterations = iterations + 1
+			
+			if len(self.graph[state]) > 0:
+				expandedNodes = expandedNodes + 1
 			
 			i = 0 
 			for s in self.graph[state]: 
@@ -72,7 +74,7 @@ class GreedySearch(Solver):
 					branchFactor = 0
 				else:
 					branchFactor = branchingSum/iterations
-				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed)
+				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed, iterations)
 				break
 		
 		return self.solution

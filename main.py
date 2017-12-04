@@ -4,7 +4,7 @@ import argparse
 
 from Solver import *
 from Backtracking import *
-#from BreadthFirst import *
+from BreadthFirst import *
 from DepthFirst import *
 from OrderedSearch import *
 from AStar import *
@@ -82,6 +82,7 @@ def printStatistics(solution):
 	print ("Branching Factor: " + str(solution.getBranchFactor()))
 	print ("Number of expanded nodes: " + str(solution.getExpandedNodes()))
 	print ("Number of visited nodes: " + str(solution.getNumberVisited()))
+	print ("Number of iterations: " + str(solution.getNumberOfIterations()))
 	print ("Solution depth: " + str(solution.getDepth()))
 	print ("Solution Cost: " + str(solution.getCost()))
 	print ("Time elapsed: " + str(solution.getTimeElapsed()))
