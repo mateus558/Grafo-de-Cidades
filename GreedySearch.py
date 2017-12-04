@@ -17,7 +17,7 @@ class GreedySearch(Solver):
 		posA = stateA.getPos()
 		posB = stateB.getPos()
 		
-		return math.sqrt((posB[0] - posA[0]) + (posB[1] - posA[1]))
+		return math.sqrt((posB[0] - posA[0])*(posB[0] - posA[0]) + (posB[1] - posA[1])*(posB[1] - posA[1]))
 	
 	def solve(self):
 		expandedNodes = 0

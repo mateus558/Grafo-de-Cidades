@@ -18,34 +18,33 @@ class Backtracking(Solver):
         while(not failure or not sucess):
             #enquanto nao conseguir sucesso ou fracasso ele vai pegar o "operador" do objeto
             #preciso pegar um determinado elemento da lista
-            if(not self.graph[state][state.getOperator()] is None):
-                rn = self.graph[state][state.getOperator()]
-                rn.increaseCostSoFar(rn[1])	
+            if(state.getOperator() < len(self.graph[state])):
+                rn = self.graph[state][state.getOperator()][0]
+                rn.increaseCostSoFar(1)	
                 state.setOperator(state.getOperator() + 1)
-                visited.append(rn)
+                self.visited.append(rn)
                 rn.setFather(state)
                 state = rn
-                if(state == end):
+                if(state == self.end):
                     sucess = True
-            if(state == self.start):
-                failure = True
             else:
-                state = state.getFather()
-            iterations = iterations + 1
+                if(state == self.start):
+                    failure = True
+                else:
+                    state = state.getFather()
+                iterations = iterations + 1
         end_time = time.time()
         if(sucess):
             itr = state
             cost = itr.getCost()
-            self.path = []
+            path = []
             time_elapsed = end_time - start_time
-            while True:
-                if itr:
-                    path.append(itr)
-                    itr = itr.getFather()
-                else:
-                    path.reverse()
-                    self.solution = Solution(path, cost, expandedNodes, branchFactor, visited, time_elapsed)
-                    break
+            while itr != self.start:
+                path.append(itr)
+                itr = itr.getFather()            
+            path.append(self.start)
+            path.reverse()
+            self.solution = Solution(path, cost, 0, 0, self.visited, time_elapsed)
         else:
             self.solution is None
         return self.solution
