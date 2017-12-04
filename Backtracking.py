@@ -12,39 +12,51 @@ class Backtracking(Solver):
         self.operators = []
         sucess = False
         failure = False
+        expandedNodes = 0
+        branchingSum = 0
+        depth = 0
+        iterations = 0
         currentState = start;
         start_time = time.time()
-        while(!failure or !sucess):
+        while(not failure or not sucess):
             # pega os filhos
-            if(len(operators) != 0 and !operators[i].isVisited()):
+            currentState.setDepth(depth)
+            operators = graph[currentState]
+            iterations = iterations + 1
+            if(len(operators) != 0 and not operators[i].isVisited()):
                 for i in range(0, len(operators) - 1):
-                    if(!operators[i].isVisited()):
+                    if(not operators[i].isVisited()):
                         operators[i].setFather(currentState)
                         currentState = operators[i]
+                        depth = depth + 1
+                        expandedNodes = expandedNodes + 1
                 if(currentState == end):
                     sucess = True
             else:
                 if(currentState == start):
                     failure = True
                 else:
+                    currentState.setVisited(true)
                     currentState = currentState.getFather()
+                    depth = currentState.getDepth()
         end_time = time.time()
         if(sucess):
             itr = currentState
             cost = itr.getCost()
-		    path = []
+            self.path = []
             time_elapsed = end_time - start_time
             while True:
-			if itr:
-				path.append(itr)
-				itr = itr.getFather()
-			else:
-				path.reverse()
-				self.solution = Solution(path, cost, time_elapsed)
-				break
-		else:
+                if itr:
+                    path.append(itr)
+                    itr = itr.getFather()
+                else:
+                    path.reverse()
+                    self.solution = Solution(path, cost, expandedNodes, branchFactor, numberVisited, time_elapsed)
+                    break
+        else:
             self.solution = NULL
-		 return self.solution
+        return self.solution
+
     def insertionSort(self,array):
         for i in range (1, len(array)-1):
             key = array[i]

@@ -4,13 +4,19 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
-AStar	../AStar.py	/^class AStar(Solver):$/;"	kind:class	line:10
+AStar	../AStar.py	/^class AStar(Solver):$/;"	kind:class	line:11
 AStar.py	../AStar.py	1;"	kind:file	line:1
-Backtracking	../Backtracking.py	/^class Backtracking(Solver):$/;"	kind:class	line:5
+Backtracking	../Backtracking.py	/^class Backtracking(Solver):$/;"	kind:class	line:6
 Backtracking.py	../Backtracking.py	1;"	kind:file	line:1
 BreadthFirst	../BreadthFirst.py	/^class BreadthFirst(Solver):$/;"	kind:class	line:5
 BreadthFirst.py	../BreadthFirst.py	1;"	kind:file	line:1
-OrderedSearch	../OrderedSearch.py	/^class OrderedSearch(Solver):$/;"	kind:class	line:10
+DepthFirst	../DepthFirst.py	/^class DepthFirst(Solver):$/;"	kind:class	line:5
+DepthFirst.py	../DepthFirst.py	1;"	kind:file	line:1
+GreedySearch	../GreedySearch.py	/^class GreedySearch(Solver):$/;"	kind:class	line:11
+GreedySearch.py	../GreedySearch.py	1;"	kind:file	line:1
+IDAStar	../IDAStar.py	/^class IDAStar(Solver):$/;"	kind:class	line:12
+IDAStar.py	../IDAStar.py	1;"	kind:file	line:1
+OrderedSearch	../OrderedSearch.py	/^class OrderedSearch(Solver):$/;"	kind:class	line:11
 OrderedSearch.py	../OrderedSearch.py	1;"	kind:file	line:1
 Solution	../Solution.py	/^class Solution:$/;"	kind:class	line:3
 Solution.py	../Solution.py	1;"	kind:file	line:1
@@ -18,46 +24,68 @@ Solver	../Solver.py	/^class Solver:$/;"	kind:class	line:4
 Solver.py	../Solver.py	1;"	kind:file	line:1
 State	../State.py	/^class State:$/;"	kind:class	line:1
 State.py	../State.py	1;"	kind:file	line:1
-__cmp__	../State.py	/^	def __cmp__(self, other):$/;"	kind:member	line:44
-__eq__	../State.py	/^	def __eq__(self, other):$/;"	kind:member	line:56
-__hash__	../State.py	/^	def __hash__(self):$/;"	kind:member	line:53
-__init__	../AStar.py	/^	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):$/;"	kind:member	line:11
-__init__	../Backtracking.py	/^    def __init__(self, start=State(), end=State(), graph=defaultdict(list)):$/;"	kind:member	line:6
+__cmp__	../State.py	/^	def __cmp__(self, other):$/;"	kind:member	line:57
+__eq__	../State.py	/^	def __eq__(self, other):$/;"	kind:member	line:69
+__hash__	../State.py	/^	def __hash__(self):$/;"	kind:member	line:66
+__init__	../AStar.py	/^	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):$/;"	kind:member	line:12
+__init__	../Backtracking.py	/^    def __init__(self, start=State(), end=State(), graph=defaultdict(list)):$/;"	kind:member	line:7
 __init__	../BreadthFirst.py	/^	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):$/;"	kind:member	line:6
-__init__	../OrderedSearch.py	/^	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):$/;"	kind:member	line:11
+__init__	../DepthFirst.py	/^    def __init__(self, start = State(), end = State(), graph = defaultdict(list)):$/;"	kind:member	line:6
+__init__	../GreedySearch.py	/^	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):$/;"	kind:member	line:12
+__init__	../IDAStar.py	/^    def __init__(self, start = State(), end = State(), graph = defaultdict(list)):$/;"	kind:member	line:13
+__init__	../OrderedSearch.py	/^	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):$/;"	kind:member	line:12
 __init__	../Solution.py	/^	def __init__(self, path = [], cost = 0.0, expandedNodes = 0, branchFactor = 0.0, numberVisited = 0, time_elapsed = 0.0):$/;"	kind:member	line:4
 __init__	../Solver.py	/^	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):$/;"	kind:member	line:6
 __init__	../State.py	/^	def __init__(self, x = 0.0, y = 0.0, id = " ", priority = 0.0):$/;"	kind:member	line:3
-__ne__	../State.py	/^	def __ne__(self, other):$/;"	kind:member	line:59
-__repr__	../State.py	/^	def __repr__(self):$/;"	kind:member	line:47
-__str__	../State.py	/^	def __str__(self):$/;"	kind:member	line:50
-clear	../main.py	/^def clear():$/;"	kind:function	line:13
-getBranchFactor	../Solution.py	/^	def getBranchFactor(self):$/;"	kind:member	line:21
-getCost	../State.py	/^	def getCost(self):$/;"	kind:member	line:38
-getExpandedNodes	../Solution.py	/^	def getExpandedNodes(self):$/;"	kind:member	line:24
-getFather	../State.py	/^	def getFather(self):$/;"	kind:member	line:32
-getId	../State.py	/^	def getId(self):$/;"	kind:member	line:14
-getNumberVisited	../Solution.py	/^	def getNumberVisited(self):$/;"	kind:member	line:18
+__lt__	../State.py	/^	def __lt__(self, other):$/;"	kind:member	line:72
+__ne__	../State.py	/^	def __ne__(self, other):$/;"	kind:member	line:75
+__repr__	../State.py	/^	def __repr__(self):$/;"	kind:member	line:60
+__str__	../State.py	/^	def __str__(self):$/;"	kind:member	line:63
+args	../main.py	/^args = parser.parse_args()$/;"	kind:variable	line:18
+clear	../main.py	/^def clear():$/;"	kind:function	line:26
+end	../main.py	/^end = None$/;"	kind:variable	line:21
+enterObjective	../main.py	/^def enterObjective():$/;"	kind:function	line:35
+getBranchFactor	../Solution.py	/^	def getBranchFactor(self):$/;"	kind:member	line:24
+getCost	../Solution.py	/^	def getCost(self):$/;"	kind:member	line:33
+getCost	../State.py	/^	def getCost(self):$/;"	kind:member	line:51
+getCostSoFar	../State.py	/^	def getCostSoFar(self):$/;"	kind:member	line:45
+getDepth	../Solution.py	/^	def getDepth(self):$/;"	kind:member	line:18
+getDepth	../State.py	/^	def getDepth(self):$/;"	kind:member	line:36
+getExpandedNodes	../Solution.py	/^	def getExpandedNodes(self):$/;"	kind:member	line:27
+getFather	../State.py	/^	def getFather(self):$/;"	kind:member	line:39
+getId	../State.py	/^	def getId(self):$/;"	kind:member	line:15
+getNumberVisited	../Solution.py	/^	def getNumberVisited(self):$/;"	kind:member	line:21
 getPath	../Solution.py	/^	def getPath(self):$/;"	kind:member	line:15
-getPos	../State.py	/^	def getPos(self):$/;"	kind:member	line:11
-getTimeElapsed	../Solution.py	/^	def getTimeElapsed(self):$/;"	kind:member	line:27
-heuristic	../AStar.py	/^	def heuristic(self, stateA, stateB):$/;"	kind:member	line:15
-increaseCostSoFar	../State.py	/^	def increaseCostSoFar(self, cost):$/;"	kind:member	line:35
+getPos	../State.py	/^	def getPos(self):$/;"	kind:member	line:12
+getTimeElapsed	../Solution.py	/^	def getTimeElapsed(self):$/;"	kind:member	line:30
+heuristic	../AStar.py	/^	def heuristic(self, stateA, stateB):$/;"	kind:member	line:16
+heuristic	../GreedySearch.py	/^	def heuristic(self, stateA, stateB):$/;"	kind:member	line:16
+heuristic	../IDAStar.py	/^    def heuristic(self, stateA, stateB):$/;"	kind:member	line:17
+increaseCostSoFar	../State.py	/^	def increaseCostSoFar(self, cost):$/;"	kind:member	line:42
 insertState	../Solution.py	/^	def insertState(self, s):$/;"	kind:member	line:12
-isVisited	../State.py	/^	def isVisited(self):$/;"	kind:member	line:41
+insertionSort	../Backtracking.py	/^    def insertionSort(self,array):$/;"	kind:member	line:48
+isVisited	../State.py	/^	def isVisited(self):$/;"	kind:member	line:54
 itr	../Backtracking.py	/^				itr = itr.getFather()$/;"	kind:variable	line:40
-main	../main.py	/^def main():$/;"	kind:function	line:34
+main	../main.py	/^def main():$/;"	kind:function	line:120
 main.py	../main.py	1;"	kind:file	line:1
-printStatistics	../main.py	/^def printStatistics(solution):$/;"	kind:function	line:29
+mainLoop	../main.py	/^def mainLoop(solver, solution, fileName):$/;"	kind:function	line:89
+parser	../main.py	/^parser = argparse.ArgumentParser()$/;"	kind:variable	line:11
+printStatistics	../main.py	/^def printStatistics(solution):$/;"	kind:function	line:72
 read	../Solver.py	/^	def read(self, file):$/;"	kind:member	line:13
-selectMethod	../main.py	/^def selectMethod(solver):$/;"	kind:function	line:22
-setFather	../State.py	/^	def setFather(self, state):$/;"	kind:member	line:29
-setId	../State.py	/^	def setId(self, id):$/;"	kind:member	line:20
-setPos	../State.py	/^	def setPos(self,x, y):$/;"	kind:member	line:17
-setPriority	../State.py	/^	def setPriority(self, priority):$/;"	kind:member	line:23
-setVisited	../State.py	/^	def setVisited(self, visited):$/;"	kind:member	line:26
-solve	../AStar.py	/^	def solve():$/;"	kind:member	line:21
-solve	../Backtracking.py	/^    def solve(self):$/;"	kind:member	line:13
-solve	../BreadthFirst.py	/^	def solve(self):$/;"	kind:member	line:10
-solve	../OrderedSearch.py	/^	def solve(self):$/;"	kind:member	line:17
-wait	../main.py	/^def wait():$/;"	kind:function	line:10
+selectMethod	../main.py	/^def selectMethod(solver):$/;"	kind:function	line:44
+setCostSoFar	../State.py	/^	def setCostSoFar(self, val):$/;"	kind:member	line:48
+setDepth	../State.py	/^	def setDepth(self, depth):$/;"	kind:member	line:33
+setFather	../State.py	/^	def setFather(self, state):$/;"	kind:member	line:30
+setId	../State.py	/^	def setId(self, id):$/;"	kind:member	line:21
+setPos	../State.py	/^	def setPos(self,x, y):$/;"	kind:member	line:18
+setPriority	../State.py	/^	def setPriority(self, priority):$/;"	kind:member	line:24
+setVisited	../State.py	/^	def setVisited(self, visited):$/;"	kind:member	line:27
+solve	../AStar.py	/^	def solve(self):$/;"	kind:member	line:22
+solve	../Backtracking.py	/^    def solve(self):$/;"	kind:member	line:11
+solve	../BreadthFirst.py	/^	def solve(self):$/;"	kind:member	line:13
+solve	../DepthFirst.py	/^    def solve(self):$/;"	kind:member	line:13
+solve	../GreedySearch.py	/^	def solve(self):$/;"	kind:member	line:22
+solve	../IDAStar.py	/^    def solve(self):$/;"	kind:member	line:22
+solve	../OrderedSearch.py	/^	def solve(self):$/;"	kind:member	line:18
+start	../main.py	/^start = None$/;"	kind:variable	line:20
+wait	../main.py	/^def wait():$/;"	kind:function	line:23

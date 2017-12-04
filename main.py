@@ -3,7 +3,9 @@ import os
 import argparse
 
 from Solver import *
-from BreadthFirst import *
+from Backtracking import *
+#from BreadthFirst import *
+from DepthFirst import *
 from OrderedSearch import *
 from AStar import *
 from GreedySearch import *
@@ -53,11 +55,11 @@ def selectMethod(solver):
 	o = int(input("> "))
 	enterObjective()
 	if o == 1:
-		solver = Solver()
+		solver = Backtracking(start, end)
 	if o == 2:
-		solver = BreadthFirst(start, end)
+		solver = Solver() #BreadthFirst(start, end)
 	if o == 3:
-		solver = Solver()
+		solver = DepthFirst(start, end)
 	if o == 4:
 		solver = OrderedSearch(start, end)
 	if o == 5:
