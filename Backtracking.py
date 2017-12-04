@@ -5,64 +5,46 @@ from Solution import *
 
 class Backtracking(Solver):
     def __init__(self, start=State(), end=State(), graph=defaultdict(list)):
-        super(Backtracking, self).__init__(
-            self, start, end, graph=defaultdict(list))
-
+        super(Backtracking, self).__init__(start, end, graph=defaultdict(list))
+        self.visited = []
     def solve(self):
-        self.operators = []
+        #inicia sem sucesso e sem fracasso
         sucess = False
         failure = False
-        expandedNodes = 0
-        branchingSum = 0
-        depth = 0
+        state = self.start
         iterations = 0
-        currentState = start;
         start_time = time.time()
+
         while(not failure or not sucess):
-            # pega os filhos
-            currentState.setDepth(depth)
-            operators = graph[currentState]
-            iterations = iterations + 1
-            if(len(operators) != 0 and not operators[i].isVisited()):
-                for i in range(0, len(operators) - 1):
-                    if(not operators[i].isVisited()):
-                        operators[i].setFather(currentState)
-                        currentState = operators[i]
-                        depth = depth + 1
-                        expandedNodes = expandedNodes + 1
-                if(currentState == end):
+            #enquanto nao conseguir sucesso ou fracasso ele vai pegar o "operador" do objeto
+            #preciso pegar um determinado elemento da lista
+            if(state.getOperator() < len(self.graph[state])):
+                rn = self.graph[state][state.getOperator()][0]
+                rn.increaseCostSoFar(1)	
+                state.setOperator(state.getOperator() + 1)
+                self.visited.append(rn)
+                rn.setFather(state)
+                state = rn
+                if(state == self.end):
                     sucess = True
             else:
-                if(currentState == start):
+                if(state == self.start):
                     failure = True
                 else:
-                    currentState.setVisited(true)
-                    currentState = currentState.getFather()
-                    depth = currentState.getDepth()
+                    state = state.getFather()
+                iterations = iterations + 1
         end_time = time.time()
         if(sucess):
-            itr = currentState
+            itr = state
             cost = itr.getCost()
-            self.path = []
+            path = []
             time_elapsed = end_time - start_time
-            while True:
-                if itr:
-                    path.append(itr)
-                    itr = itr.getFather()
-                else:
-                    path.reverse()
-                    self.solution = Solution(path, cost, expandedNodes, branchFactor, numberVisited, time_elapsed)
-                    break
+            while itr != self.start:
+                path.append(itr)
+                itr = itr.getFather()            
+            path.append(self.start)
+            path.reverse()
+            self.solution = Solution(path, cost, 0, 0, self.visited, time_elapsed)
         else:
-            self.solution = NULL
+            self.solution is None
         return self.solution
-
-    def insertionSort(self,array):
-        for i in range (1, len(array)-1):
-            key = array[i]
-            j = i-1
-            while(j>=0 and array[j].getPos()[0] > key.getPos()[0]):
-                array[j+1] = array[j]
-                j = j-1
-            array[j+1] = key
-        return array

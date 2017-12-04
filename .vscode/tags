@@ -41,10 +41,10 @@ __lt__	../State.py	/^	def __lt__(self, other):$/;"	kind:member	line:72
 __ne__	../State.py	/^	def __ne__(self, other):$/;"	kind:member	line:75
 __repr__	../State.py	/^	def __repr__(self):$/;"	kind:member	line:60
 __str__	../State.py	/^	def __str__(self):$/;"	kind:member	line:63
-args	../main.py	/^args = parser.parse_args()$/;"	kind:variable	line:18
-clear	../main.py	/^def clear():$/;"	kind:function	line:26
-end	../main.py	/^end = None$/;"	kind:variable	line:21
-enterObjective	../main.py	/^def enterObjective():$/;"	kind:function	line:35
+args	../main.py	/^args = parser.parse_args()$/;"	kind:variable	line:20
+clear	../main.py	/^def clear():$/;"	kind:function	line:28
+end	../main.py	/^end = None$/;"	kind:variable	line:23
+enterObjective	../main.py	/^def enterObjective():$/;"	kind:function	line:37
 getBranchFactor	../Solution.py	/^	def getBranchFactor(self):$/;"	kind:member	line:24
 getCost	../Solution.py	/^	def getCost(self):$/;"	kind:member	line:33
 getCost	../State.py	/^	def getCost(self):$/;"	kind:member	line:51
@@ -63,16 +63,15 @@ heuristic	../GreedySearch.py	/^	def heuristic(self, stateA, stateB):$/;"	kind:me
 heuristic	../IDAStar.py	/^    def heuristic(self, stateA, stateB):$/;"	kind:member	line:17
 increaseCostSoFar	../State.py	/^	def increaseCostSoFar(self, cost):$/;"	kind:member	line:42
 insertState	../Solution.py	/^	def insertState(self, s):$/;"	kind:member	line:12
-insertionSort	../Backtracking.py	/^    def insertionSort(self,array):$/;"	kind:member	line:48
+insertionSort	../Backtracking.py	/^    def insertionSort(self,array):$/;"	kind:member	line:60
 isVisited	../State.py	/^	def isVisited(self):$/;"	kind:member	line:54
-itr	../Backtracking.py	/^				itr = itr.getFather()$/;"	kind:variable	line:40
-main	../main.py	/^def main():$/;"	kind:function	line:120
+main	../main.py	/^def main():$/;"	kind:function	line:122
 main.py	../main.py	1;"	kind:file	line:1
-mainLoop	../main.py	/^def mainLoop(solver, solution, fileName):$/;"	kind:function	line:89
-parser	../main.py	/^parser = argparse.ArgumentParser()$/;"	kind:variable	line:11
-printStatistics	../main.py	/^def printStatistics(solution):$/;"	kind:function	line:72
+mainLoop	../main.py	/^def mainLoop(solver, solution, fileName):$/;"	kind:function	line:91
+parser	../main.py	/^parser = argparse.ArgumentParser()$/;"	kind:variable	line:13
+printStatistics	../main.py	/^def printStatistics(solution):$/;"	kind:function	line:74
 read	../Solver.py	/^	def read(self, file):$/;"	kind:member	line:13
-selectMethod	../main.py	/^def selectMethod(solver):$/;"	kind:function	line:44
+selectMethod	../main.py	/^def selectMethod(solver):$/;"	kind:function	line:46
 setCostSoFar	../State.py	/^	def setCostSoFar(self, val):$/;"	kind:member	line:48
 setDepth	../State.py	/^	def setDepth(self, depth):$/;"	kind:member	line:33
 setFather	../State.py	/^	def setFather(self, state):$/;"	kind:member	line:30
@@ -80,12 +79,12 @@ setId	../State.py	/^	def setId(self, id):$/;"	kind:member	line:21
 setPos	../State.py	/^	def setPos(self,x, y):$/;"	kind:member	line:18
 setPriority	../State.py	/^	def setPriority(self, priority):$/;"	kind:member	line:24
 setVisited	../State.py	/^	def setVisited(self, visited):$/;"	kind:member	line:27
-solve	../AStar.py	/^	def solve(self):$/;"	kind:member	line:22
+solve	../AStar.py	/^	def solve(self):$/;"	kind:member	line:23
 solve	../Backtracking.py	/^    def solve(self):$/;"	kind:member	line:11
 solve	../BreadthFirst.py	/^	def solve(self):$/;"	kind:member	line:13
 solve	../DepthFirst.py	/^    def solve(self):$/;"	kind:member	line:13
 solve	../GreedySearch.py	/^	def solve(self):$/;"	kind:member	line:22
 solve	../IDAStar.py	/^    def solve(self):$/;"	kind:member	line:22
 solve	../OrderedSearch.py	/^	def solve(self):$/;"	kind:member	line:18
-start	../main.py	/^start = None$/;"	kind:variable	line:20
-wait	../main.py	/^def wait():$/;"	kind:function	line:23
+start	../main.py	/^start = None$/;"	kind:variable	line:22
+wait	../main.py	/^def wait():$/;"	kind:function	line:25

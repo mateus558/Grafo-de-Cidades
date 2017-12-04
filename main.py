@@ -136,11 +136,11 @@ def main():
 		hasFlags = False
 		mainLoop(solver, solution, fileName)
 	elif args.method == "BTCK": #Backtracking
-		solver = Solver()
+		solver = Backtracking(State(x, y), State(x1, y1))
 	elif args.method == "BFS":	#Breadth First Search
 		solver = BreadthFirst(State(x, y), State(x1, y1))
 	elif args.method == "DFSL":	#Depth First Search limited
-		solver = BreadthFirst(State(x, y), State(x1, y1))
+		solver = DepthFirst(State(x, y), State(x1, y1))
 	elif args.method == "OS":	#Ordered Search
 		solver = OrderedSearch(State(x, y), State(x1, y1))
 	elif args.method == "GS":	#Greedy Search
@@ -154,7 +154,6 @@ def main():
 		solver.read(fileName)
 		solution = solver.solve()
 		printStatistics(solution)
-	
 	return
 	
 main()
