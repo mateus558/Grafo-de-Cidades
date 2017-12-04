@@ -4,7 +4,7 @@ import argparse
 
 from Solver import *
 from Backtracking import *
-#from BreadthFirst import *
+from BreadthFirst import *
 from DepthFirst import *
 from OrderedSearch import *
 from AStar import *
@@ -139,7 +139,7 @@ def main():
 	elif args.method == "BFS":	#Breadth First Search
 		solver = BreadthFirst(State(x, y), State(x1, y1))
 	elif args.method == "DFSL":	#Depth First Search limited
-		solver = BreadthFirst(State(x, y), State(x1, y1))
+		solver = DepthFirst(State(x, y), State(x1, y1))
 	elif args.method == "OS":	#Ordered Search
 		solver = OrderedSearch(State(x, y), State(x1, y1))
 	elif args.method == "GS":	#Greedy Search
