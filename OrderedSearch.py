@@ -24,7 +24,7 @@ class OrderedSearch(Solver):
 		self.heap.put(self.start)
 		visited = [self.start]
 			
-		while not self.heap == []:
+		while not self.heap.queue == []:
 			state = self.heap.get()
 			visited.append(state)
 				

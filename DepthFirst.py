@@ -7,7 +7,7 @@ class DepthFirst(Solver):
         super (DepthFirst, self).__init__(start, end, graph)
         self.stack = []
         self.visited = []
-        self.maxDepth = 100
+        self.maxDepth = 4
 
     def solve(self):
         expandedNodes = 0
