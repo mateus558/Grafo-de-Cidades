@@ -34,7 +34,6 @@ class BreadthFirst(Solver):
 			iterations = iterations + 1
 			
 			#Para cada estado no grafo de estados	
-			i = 0
 			for s in self.graph[state]: 
 				expandedNodes = expandedNodes + 1
 				#0 - estado; 1 - custo para chegar naquele estado 
@@ -48,14 +47,9 @@ class BreadthFirst(Solver):
 					s[0].setFather(state)
 					s[0].increaseCostSoFar(s[1])	
 			self.visited.append(state)
-		
-			i = i + 1
 		#END WHILE
 					
 		end_time = time.time()
-		
-		#Computa o caminho e prepara a solucao
-		itr = self.end
 		time_elapsed = end_time - start_time
 				
 		return self.setSolution(self.end, iterations, branchingSum, expandedNodes, self.visited, time_elapsed)

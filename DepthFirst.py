@@ -42,7 +42,6 @@ class DepthFirst(Solver):
                     
                     self.stack.append(s[0])
                     expandedNodes = expandedNodes + 1
-            
             self.visited.append(state)
 
         end_time = time.time()

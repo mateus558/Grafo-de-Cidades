@@ -46,7 +46,7 @@ class OrderedSearch(Solver):
 					s[0].setDepth(depth)
 					s[0].setFather(state)
 					s[0].setCostSoFar(state.getCostSoFar() + s[1])
-					s[0].setPriority(state.getCostSoFar() + s[1]);
+					s[0].setPriority(state.getCostSoFar());
 	
 					self.heap.put(s[0])
 					#self.graph[s[0]][i][0].setCostSoFar(state.getCostSoFar() + s[1])

@@ -31,7 +31,6 @@ class AStar(Solver):
 		
 		while not self.heap == []:
 			state = self.heap.get()
-			visited.append(state)
 			
 			if state == self.end:
 				self.end = state
@@ -42,12 +41,11 @@ class AStar(Solver):
 			i = 0
 			for s in self.graph[state]:
 				expandedNodes = expandedNodes + 1
-				 
-				if s[0] not in visited:
-					cost = s[1] + self.heuristic(state, s[0])
+				depth = state.getDepth() + 1
 				
-					depth = state.getDepth() + 1
+				if s[0] not in visited:
 					branchingSum = branchingSum + 1
+					cost = s[1] + self.heuristic(state, s[0])
 
 					s[0].setDepth(depth)
 					s[0].setFather(state)
@@ -55,7 +53,7 @@ class AStar(Solver):
 					s[0].setPriority(cost)
 					self.heap.put(s[0])
 				i = i+1
-		
+			visited.append(state)
 		end_time = time.time()
 		time_elapsed = end_time - start_time
 		
