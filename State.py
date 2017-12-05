@@ -25,6 +25,9 @@ class State:
 	def setPriority(self, priority):
 		self.priority = priority
 	
+	def getPriority(self):
+		return self.priority
+	
 	def setVisited(self, visited):
 		self.visited = visited
 	

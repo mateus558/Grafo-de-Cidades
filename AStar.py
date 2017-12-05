@@ -1,5 +1,6 @@
 import time
 import math
+from heapq import *
 from Solver import *
 from Solution import *
 
@@ -28,7 +29,7 @@ class AStar(Solver):
 		self.heap.put(self.start)
 		visited = [self.start]
 		
-		while not self.heap.empty():
+		while not self.heap == []:
 			state = self.heap.get()
 			visited.append(state)
 			
@@ -36,17 +37,15 @@ class AStar(Solver):
 				self.end = state
 				break
 			
-			iterations = iterations + 1
-
-			i = 0
+			iterations = iterations + 1		
 			
-			if len(self.graph[state]) > 0:
+			i = 0
+			for s in self.graph[state]:
 				expandedNodes = expandedNodes + 1
-				  
-			for s in self.graph[state]: 
+				 
 				if s[0] not in visited:
 					cost = s[1] + self.heuristic(state, s[0])
-					
+				
 					depth = state.getDepth() + 1
 					branchingSum = branchingSum + 1
 
@@ -55,28 +54,10 @@ class AStar(Solver):
 					s[0].increaseCostSoFar(s[1])
 					s[0].setPriority(cost)
 					self.heap.put(s[0])
-					self.graph[s[0]][i][0].increaseCostSoFar(s[1])
-					
-			i = i+1
+				i = i+1
 		
 		end_time = time.time()
-		itr = self.end
-		cost = itr.getCost()
-		path = []
 		time_elapsed = end_time - start_time
 		
-		while True:
-			if itr:
-				path.append(itr)
-				itr = itr.getFather()
-			else:
-				path.reverse()
-				if iterations == 0:
-					branchFactor = 0
-				else:
-					branchFactor = branchingSum/expandedNodes
-				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed, iterations)
-				break
-		
-		return self.solution
+		return self.setSolution(self.end, iterations, branchingSum, expandedNodes, visited, time_elapsed)
 

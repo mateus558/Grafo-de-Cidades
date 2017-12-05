@@ -60,22 +60,7 @@ class GreedySearch(Solver):
 		end_time = time.time()
 		
 		itr = self.end
-		cost = itr.getCost()
-		path = []
 		time_elapsed = end_time - start_time
-		
-		while True:
-			if itr:
-				path.append(itr)
-				itr = itr.getFather()
-			else:
-				path.reverse()
-				if iterations == 0:
-					branchFactor = 0
-				else:
-					branchFactor = branchingSum/iterations
-				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed, iterations)
-				break
-		
-		return self.solution
+				
+		return self.setSolution(self.end, iterations, branchingSum, expandedNodes, visited, time_elapsed)
 

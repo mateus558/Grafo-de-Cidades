@@ -7,8 +7,7 @@ class DepthFirst(Solver):
         super (DepthFirst, self).__init__(start, end, graph)
         self.stack = []
         self.visited = []
-        self.start.setFather(State())
-        self.maxDepth = 10000
+        self.maxDepth = 100
 
     def solve(self):
         expandedNodes = 0
@@ -18,43 +17,36 @@ class DepthFirst(Solver):
         start_time = time.time()
         self.stack.append(self.start)
         self.visited = [self.start]
-        while (not self.stack == []) and (depth < self.maxDepth):
+        
+        while (not self.stack == []):
             state = self.stack[len(self.stack)-1] #return the top
             self.stack.pop()
+            
+            if state == self.end:
+                self.end = state
+                break                        
+           
+            
             #acho q aqui tem problema
-            i = 0
             iterations = iterations + 1
             for s in self.graph[state]: 
-				#0 - estado; 1 - custo para chegar naquele estado 
-				#Verifica se o estado nao foi visitado e o visita
-                if s[0] not in self.visited:
-                    self.stack.append(s[0])
-                    depth = state.getDepth() + 1
+                depth = state.getDepth() + 1
+                #0 - estado; 1 - custo para chegar naquele estado 
+                #Verifica se o estado nao foi visitado e o visita
+                if s[0] not in self.visited and depth < self.maxDepth:
                     branchingSum = branchingSum + 1
+                    
                     s[0].setDepth(depth)
                     s[0].setFather(state)
                     s[0].increaseCostSoFar(s[1])
-                    self.graph[s[0]][i][0].increaseCostSoFar(s[1])
+                    
+                    self.stack.append(s[0])
                     expandedNodes = expandedNodes + 1
-                    self.visited.append(s[0])
-            i = i+1
+            
+            self.visited.append(state)
 
         end_time = time.time()
-        itr = state
-        cost = itr.getCost()
-        path = []
         time_elapsed = end_time - start_time
-        while True:
-            if itr:
-                path.append(itr)
-                itr = itr.getFather()
-            else:
-                path.reverse()
-                if iterations == 0:
-                    branchFactor = 0
-                else:
-                    branchFactor = branchingSum/iterations
-                    self.solution = Solution(path, cost, expandedNodes, branchFactor, len(self.visited), time_elapsed)
-                    break
-        return self.solution
+
+        return self.setSolution(self.end, iterations, branchingSum, expandedNodes, self.visited, time_elapsed)
         
