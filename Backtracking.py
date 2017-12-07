@@ -11,7 +11,6 @@ class Backtracking(Solver):
         self.branchingsums = 0
 
     def solveAux(self, state):
-        print(state)
         self.visited.append(state)
         self.iterations = self.iterations +1
         if(state == self.end):
@@ -38,6 +37,6 @@ class Backtracking(Solver):
         sol = self.solveAux(self.start)
         end_time = time.time()
         time_elapsed = end_time - start_time
-        return self.setSolution(self.end, self.iterations, branchingSum/iterations, 0, self.visited, time_elapsed)
+        return self.setSolution(self.end, self.iterations, self.branchingsums/self.iterations, 0, self.visited, time_elapsed)
 
    
