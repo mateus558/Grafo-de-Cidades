@@ -7,7 +7,7 @@ class State:
 		self.father = None
 		self.costSoFar = 0.0
 		self.depth = 0
-		self.operator = 0
+		self.operator = []
 		self.priority = priority
 			
 	def getPos(self):
@@ -59,10 +59,20 @@ class State:
 		return self.visited
 
 	def getOperator(self):
-		return self.operator
+		if(len(self.operator)-1 >=0):
+			return self.operator[len(self.operator)-1] #return the top
+		else:
+			return 0
 	
 	def setOperator(self, operator):
-		self.operator = operator
+		if(operator not in self.operator):
+			self.operator.append(operator)
+		else:
+			operator2 = operator
+			while (operator2 not in self.operator):
+				operator2 = operator2 + 1
+			self.operator.append(operator2)
+			
 	def __cmp__(self, other):
 		return (self.priority, other.priority)
 	
