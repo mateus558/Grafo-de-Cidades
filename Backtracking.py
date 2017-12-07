@@ -7,44 +7,36 @@ class Backtracking(Solver):
     def __init__(self, start=State(), end=State(), graph=defaultdict(list)):
         super(Backtracking, self).__init__(start, end, graph=defaultdict(list))
         self.visited = []
+        self.iteration = 0
+        self.branchingsums = 0
+
+    def solveAux(self, state):
+        self.visited.append(state)
+        self.iterations = self.iterations +1
+        if(state == self.end):
+            self.end = state
+            return state
+        elif(len(self.graph[state]) > 0):
+            for i in range(0,len(self.graph[state])):
+                self.branchingsums = self.branchingsums + 1
+                self.graph[state][i][0].setFather(state)
+                self.graph[state][i][0].setDepth(state.getDepth() + 1)
+                st = self.solveAux(self.graph[state][i][0])
+                if(st is not None):
+                    return st
+            return None
+        else:
+            return None
     def solve(self):
         #inicia sem sucesso e sem fracasso
         sucess = False
         failure = False
         state = self.start
-        iterations = 0
+        self.iterations = 0
         start_time = time.time()
-
-        while(not failure or not sucess):
-            #enquanto nao conseguir sucesso ou fracasso ele vai pegar o "operador" do objeto
-            #preciso pegar um determinado elemento da lista
-            if(state.getOperator() < len(self.graph[state])):
-                rn = self.graph[state][state.getOperator()][0]
-                rn.increaseCostSoFar(1)	
-                state.setOperator(state.getOperator() + 1)
-                self.visited.append(rn)
-                rn.setFather(state)
-                state = rn
-                if(state == self.end):
-                    sucess = True
-            else:
-                if(state == self.start):
-                    failure = True
-                else:
-                    state = state.getFather()
-                iterations = iterations + 1
+        sol = self.solveAux(self.start)
         end_time = time.time()
-        if(sucess):
-            itr = state
-            cost = itr.getCost()
-            path = []
-            time_elapsed = end_time - start_time
-            while itr != self.start:
-                path.append(itr)
-                itr = itr.getFather()            
-            path.append(self.start)
-            path.reverse()
-            self.solution = Solution(path, cost, 0, 0, self.visited, time_elapsed)
-        else:
-            self.solution is None
-        return self.solution
+        time_elapsed = end_time - start_time
+        return self.setSolution(self.end, self.iterations, self.branchingsums/self.iterations, 0, self.visited, time_elapsed)
+
+   
