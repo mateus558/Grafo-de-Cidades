@@ -27,36 +27,31 @@ class GreedySearch(Solver):
 		self.start.setPriority(0.0)
 		self.heap.put(self.start)
 		visited = [self.start]
+		ancester = State()
 		
 		while not self.heap.empty():
 			state = self.heap.get()
-			visited.append(state)
-
 			if state == self.end:
 				self.end = state
 				break
 			
 			iterations = iterations + 1
 			
-			if len(self.graph[state]) > 0:
-				expandedNodes = expandedNodes + 1
-			
-			i = 0 
 			for s in self.graph[state]: 
-				if s[0] not in visited:
+				if s[0] not in visited and s[0] != ancester:
+					expandedNodes = expandedNodes + 1
 					depth = state.getDepth() + 1
 					branchingSum = branchingSum + 1
-					h = self.heuristic(state, s[0])
+					h = self.heuristic(s[0], self.end)
 					
 					s[0].setDepth(depth)
 					s[0].setFather(state)
-					s[0].increaseCostSoFar(s[1])
+					s[0].setCostSoFar(state.getCostSoFar() + s[1])
 					s[0].setPriority(h)	
 					
 					self.heap.put(s[0])
-					self.graph[s[0]][i][0].increaseCostSoFar(s[1])
-			i = i + 1
-			
+			visited.append(state)
+			ancester = state
 		end_time = time.time()
 		
 		itr = self.end

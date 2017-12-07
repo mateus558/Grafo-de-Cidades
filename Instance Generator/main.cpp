@@ -19,6 +19,7 @@ int main(int argc, char* argv[]){
 	int i, j, size = atoi(argv[1]), k;
 	int miny = atoi(argv[2]), maxy = atoi(argv[3]), minx = atoi(argv[4]), maxx = atoi(argv[5]), maxEdges = atoi(argv[6]);
 	int first, second;
+	float minNoise = atof(argv[7]), maxNoise = atof(argv[8]);
 	bool remove;
 	vector<pair<Point, Point> > edges;
 	vector<Point> points;
@@ -73,7 +74,7 @@ int main(int argc, char* argv[]){
 	
 	size = edges.size();
 	for(i = 0; i < size; i++){
-		costs[i] = edges[i].first.distance(edges[i].second) + Random::floatInRange(0.0, 100.0);
+		costs[i] = edges[i].first.distance(edges[i].second) + Random::floatInRange(minNoise, maxNoise);
 	}	
 	
 	fname = to_string(edges.size()) + string(".inst");

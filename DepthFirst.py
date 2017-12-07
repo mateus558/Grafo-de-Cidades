@@ -38,7 +38,7 @@ class DepthFirst(Solver):
                     
                     s[0].setDepth(depth)
                     s[0].setFather(state)
-                    s[0].increaseCostSoFar(s[1])
+                    s[0].setCostSoFar(state.getCostSoFar() + s[1])
                     
                     self.stack.append(s[0])
                     expandedNodes = expandedNodes + 1

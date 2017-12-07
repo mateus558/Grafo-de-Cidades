@@ -14,11 +14,17 @@ class AStar(Solver):
 		super(AStar, self).__init__(start, end, graph)
 		self.heap = Q.PriorityQueue()
 	
-	def heuristic(self, stateA, stateB):
+	def euclidean(self, stateA, stateB):
 		posA = stateA.getPos()
 		posB = stateB.getPos()
 		
 		return math.sqrt((posB[0] - posA[0])*(posB[0] - posA[0]) + (posB[1] - posA[1])*(posB[1] - posA[1]))
+	
+	def manhattan(self, stateA, stateB):
+		posA = stateA.getPos()
+		posB = stateB.getPos()
+		
+		return abs(posA[0] - posB[0]) + abs(posA[1] - posB[1])
 	
 	def solve(self):
 		expandedNodes = 0
@@ -28,31 +34,31 @@ class AStar(Solver):
 		self.start.setPriority(0)
 		self.heap.put(self.start)
 		visited = [self.start]
+		ancester = State()
 		
 		while not self.heap == []:
 			state = self.heap.get()
-			
 			if state == self.end:
 				self.end = state
 				break
 			
 			iterations = iterations + 1		
-			
-			i = 0
+	
 			for s in self.graph[state]:
-				expandedNodes = expandedNodes + 1
 				depth = state.getDepth() + 1
-				
-				if s[0] not in visited:
-					branchingSum = branchingSum + 1
-					cost = s[1] + self.heuristic(state, s[0])
+				s[0].setDepth(depth)
+				s[0].setFather(state)
 
-					s[0].setDepth(depth)
-					s[0].setFather(state)
-					s[0].increaseCostSoFar(s[1])
+
+				if s[0] not in visited and s[0] != ancester:
+					expandedNodes = expandedNodes + 1
+					branchingSum = branchingSum + 1
+					cost = state.getCostSoFar() + s[1] + self.manhattan(s[0], self.end)
+					s[0].setCostSoFar(state.getCostSoFar() + s[1])
 					s[0].setPriority(cost)
+					
 					self.heap.put(s[0])
-				i = i+1
+			ancester = state
 			visited.append(state)
 		end_time = time.time()
 		time_elapsed = end_time - start_time
