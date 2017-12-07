@@ -37,6 +37,6 @@ class Backtracking(Solver):
         sol = self.solveAux(self.start)
         end_time = time.time()
         time_elapsed = end_time - start_time
-        return self.setSolution(self.end, self.iterations, self.branchingsums/self.iterations, 0, self.visited, time_elapsed)
+        return self.setSolution(self.end, self.iterations, self.branchingsums/self.iterations, self.visited, self.visited, time_elapsed)
 
    
