@@ -9,6 +9,7 @@ from DepthFirst import *
 from OrderedSearch import *
 from AStar import *
 from GreedySearch import *
+from IDAStar import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--instance', help='Instance of the city graph to be solved.')
@@ -72,20 +73,23 @@ def selectMethod(solver):
 	return solver
 
 def printStatistics(solution):
-	path = solution.getPath()
+	if(solution is not None):
+		path = solution.getPath()
 	
-	print(path)
-	#for state in path:
-	#	print (state.__str__() + str(" -> "))
-	#print ("END\n")
-	
-	print ("Branching Factor: " + str(solution.getBranchFactor()))
-	print ("Number of expanded nodes: " + str(solution.getExpandedNodes()))
-	print ("Number of visited nodes: " + str(solution.getNumberVisited()))
-	print ("Number of iterations: " + str(solution.getNumberOfIterations()))
-	print ("Solution depth: " + str(solution.getDepth()))
-	print ("Solution Cost: " + str(solution.getCost()))
-	print ("Time elapsed: " + str(solution.getTimeElapsed()))
+		print(path)
+		#for state in path:
+		#	print (state.__str__() + str(" -> "))
+		#print ("END\n")
+
+		print ("Branching Factor: " + str(solution.getBranchFactor()))
+		print ("Number of expanded nodes: " + str(solution.getExpandedNodes()))
+		print ("Number of visited nodes: " + str(solution.getNumberVisited()))
+		print ("Number of iterations: " + str(solution.getNumberOfIterations()))
+		print ("Solution depth: " + str(solution.getDepth()))
+		print ("Solution Cost: " + str(solution.getCost()))
+		print ("Time elapsed: " + str(solution.getTimeElapsed()))
+	else:
+		print("Solution not found!")
 
 	return
 	
@@ -148,7 +152,7 @@ def main():
 	elif args.method == "AS":	#A* search
 		solver = AStar(State(x, y), State(x1, y1))
 	elif args.method == "IDAS": #IDA* search
-		solver = BreadthFirst(State(x, y), State(x1, y1))
+		solver = IDAStar(State(x, y), State(x1, y1))
 		
 	if hasArgs:
 		solver.read(fileName)

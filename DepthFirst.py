@@ -46,6 +46,8 @@ class DepthFirst(Solver):
 
         end_time = time.time()
         time_elapsed = end_time - start_time
-
-        return self.setSolution(self.end, iterations, branchingSum, expandedNodes, self.visited, time_elapsed)
+        if state == self.end:
+            return self.setSolution(self.end, iterations, branchingSum, expandedNodes, self.visited, time_elapsed)
+        else:
+            return None
         
