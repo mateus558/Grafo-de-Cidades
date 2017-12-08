@@ -9,6 +9,7 @@ from DepthFirst import *
 from OrderedSearch import *
 from AStar import *
 from GreedySearch import *
+from IDAStar import *
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--instance', help='Instance of the city graph to be solved.')
@@ -74,11 +75,14 @@ def selectMethod(solver):
 def printStatistics(solution):
 	path = solution.getPath()
 	
+	if(path == []):
+		print("Solution not found...")
+		return
+	
 	print(path)
 	#for state in path:
 	#	print (state.__str__() + str(" -> "))
 	#print ("END\n")
-	
 	print ("Branching Factor: " + str(solution.getBranchFactor()))
 	print ("Number of expanded nodes: " + str(solution.getExpandedNodes()))
 	print ("Number of visited nodes: " + str(solution.getNumberVisited()))
@@ -148,8 +152,9 @@ def main():
 	elif args.method == "AS":	#A* search
 		solver = AStar(State(x, y), State(x1, y1))
 	elif args.method == "IDAS": #IDA* search
-		solver = BreadthFirst(State(x, y), State(x1, y1))
-		
+		solver = IDAStar(State(x, y), State(x1, y1))
+	else:
+		print("Method invalid...")
 	if hasArgs:
 		solver.read(fileName)
 		solution = solver.solve()

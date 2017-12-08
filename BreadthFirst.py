@@ -35,11 +35,11 @@ class BreadthFirst(Solver):
 			
 			#Para cada estado no grafo de estados	
 			for s in self.graph[state]: 
-				expandedNodes = expandedNodes + 1
 				#0 - estado; 1 - custo para chegar naquele estado 
 				#Verifica se o estado nao foi visitado e o visita
 				if s[0] not in self.visited:
 					self.queue.append(s[0])
+					expandedNodes = expandedNodes + 1
 					depth = state.getDepth() + 1
 					branchingSum = branchingSum + 1
 					

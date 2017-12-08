@@ -36,8 +36,9 @@ class AStar(Solver):
 		visited = [self.start]
 		ancester = State()
 		
-		while not self.heap == []:
+		while not self.heap.queue == []:
 			state = self.heap.get()
+			
 			if state == self.end:
 				self.end = state
 				break
@@ -53,8 +54,8 @@ class AStar(Solver):
 				if s[0] not in visited and s[0] != ancester:
 					expandedNodes = expandedNodes + 1
 					branchingSum = branchingSum + 1
-					cost = state.getCostSoFar() + s[1] + self.manhattan(s[0], self.end)
-					s[0].setCostSoFar(state.getCostSoFar() + s[1])
+					cost = state.getCostSoFar() + s[1] + self.euclidean(s[0], self.end)
+					s[0].setCostSoFar(state.getCostSoFar() + s[1] + self.euclidean(s[0], self.end))
 					s[0].setPriority(cost)
 					
 					self.heap.put(s[0])

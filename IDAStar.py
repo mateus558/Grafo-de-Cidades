@@ -13,9 +13,9 @@ class IDAStar(Solver):
 	def __init__(self, start = State(), end = State(), graph = defaultdict(list)):
 		super(IDAStar, self).__init__(start, end, graph)
 		self.path = []
-        self.bound
-        self.found
-        self.f
+		self.bound = -math.inf
+		self.found = False
+		self.f = math.inf
 
 	def euclidean(self, stateA, stateB):
 		posA = stateA.getPos()
@@ -29,40 +29,48 @@ class IDAStar(Solver):
 		
 		return abs(posA[0] - posB[0]) + abs(posA[1] - posB[1])
 	def solve(self):
-		self.bound  = euclidean(self.start, self.end)
-        self.path.append(self.start)
-        while True:
-            self.found = False 
-            t = search(self.path, 0, self.bound)
-            if(self.found == True):
-                return self.setSolution(self.end, iterations, branchingSum, expandedNodes, visited, time_elapsed)
-            if(t == math.inf):
-                return None
-            self.bound = t
-        #return self.setSolution(self.end, iterations, branchingSum, expandedNodes, visited, time_elapsed)
-    def search(self, path, g, bound):
-        state = path[len(self.path)-1]
-        self.f  = g + self.euclidean(state, self.end)
-        if (self.f > self.bound):
-            self.bound = f
-            return f
-        if(self.end == state):
-            self.found = True
-            return 
-        minim = math.inf
-        for s in self.graph[state]:
-            if s[0] not in path:
-                path.append(s[0])
-                s[0].setFather(state)
-                self.found = False
-                t = search(path,g + s[1], self.bound)
-                if(self.found = True):
-                    self.found = True
-                    return 
-                if (t < minim):
-                    minim = t
-                path.pop()
-        return minim
+		self.bound  = self.euclidean(self.start, self.end)
+		self.path.append(self.start)
+		success = False
+		
+		while True:
+			self.found = False 
+			t = self.search(self.path, 0, self.bound)
+			if(self.found == True):
+				success = True
+				break
+			if(t == math.inf):
+				success = False
+				break
+			self.bound = t
+		print(self.path)
+		
+		return self.setSolution(self.end, 0, 0, 0, [], 0)
+ 
+	def search(self, path, g, bound):
+		state = path[len(self.path)-1]
+		self.f  = g + self.euclidean(state, self.end)
+		if (self.f > self.bound):
+			self.bound = self.f
+			return self.f
+		if(self.end == state):
+			self.found = True
+			return 
+		minim = math.inf
+		for s in self.graph[state]:
+			if s[0] not in path:
+				s[0].setCostSoFar(state.getCostSoFar() + s[1])
+				path.append(s[0])
+				s[0].setFather(state)
+				self.found = False
+				t = self.search(path,g + s[1], self.bound)
+				if(self.found == True):
+					self.found = True
+					return 
+				if (t < minim):
+					minim = t
+				path.pop()
+		return minim
 
 
                 

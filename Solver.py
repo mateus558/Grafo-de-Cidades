@@ -36,12 +36,20 @@ class Solver:
 			else:
 				path.reverse()
 				
+				if(len(path) == 1 and end == path[0]):
+					path.pop()
+				cost = 0
+				for j in range(0, len(path)-1):
+					for i in range(0, len(self.graph[path[j]])):
+						if self.graph[path[j]][i][0] == path[j + 1]:
+							cost = cost + self.graph[path[j]][i][1]	
+				
 				if iterations == 0:
 					branchFactor = 0
 				else:
 					branchFactor = branchingSum/iterations
 				
-				self.solution = Solution(path, self.end.getCost(), expandedNodes, branchFactor, len(visited), time_elapsed, iterations)
+				self.solution = Solution(path, cost, expandedNodes, branchFactor, len(visited), time_elapsed, iterations)
 				break	
 				
 		return self.solution		
