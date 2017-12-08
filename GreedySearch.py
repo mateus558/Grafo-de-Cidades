@@ -29,7 +29,7 @@ class GreedySearch(Solver):
 		visited = [self.start]
 		ancester = State()
 		
-		while not self.heap.empty():
+		while not self.heap.queue == []:
 			state = self.heap.get()
 			if state == self.end:
 				self.end = state

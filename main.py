@@ -73,8 +73,12 @@ def selectMethod(solver):
 	return solver
 
 def printStatistics(solution):
-	path = solution.getPath()
-	
+	if(solution is not None):
+		path = solution.getPath()
+	else:
+		print("No solution computed...")
+		return
+		
 	if(path == []):
 		print("Solution not found...")
 		return
@@ -155,6 +159,7 @@ def main():
 		solver = IDAStar(State(x, y), State(x1, y1))
 	else:
 		print("Method invalid...")
+
 	if hasArgs:
 		solver.read(fileName)
 		solution = solver.solve()
