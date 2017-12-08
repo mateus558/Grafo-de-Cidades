@@ -55,7 +55,7 @@ class AStar(Solver):
 					expandedNodes = expandedNodes + 1
 					branchingSum = branchingSum + 1
 					cost = state.getCostSoFar() + s[1] + self.euclidean(s[0], self.end)
-					s[0].setCostSoFar(state.getCostSoFar() + s[1] + self.euclidean(s[0], self.end))
+					s[0].setCostSoFar(state.getCostSoFar() + s[1] )
 					s[0].setPriority(cost)
 					
 					self.heap.put(s[0])
